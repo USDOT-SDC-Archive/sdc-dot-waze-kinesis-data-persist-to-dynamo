@@ -35,11 +35,13 @@ def __persist_to_dynamodb(records):
         year = decoded_json.get("year")
         bucket = decoded_json.get("bucket-name")
         s3_key = decoded_json.get("s3-key")
-
         batch_id = __get_latest_batch()
-
-        Utils.persist_record_to_dynamodb_table(s3_key, table_name, state, num_records, bucket, batch_id, is_historical, month, year)
-        
+        LoggerUtility.logInfo("s3_key:"+s3_key)
+        data_set = s3_key.split("/")[0]
+        if data_set == "waze":
+            Utils.persist_record_to_dynamodb_table(s3_key, table_name, state, num_records, bucket, batch_id, is_historical, month, year)
+        else:
+            LoggerUtility.logInfo("Skipped the record because the data set is:"+data_set)
     LoggerUtility.logInfo("Data persisted to dynamodb successfully from Kinesis!")
 
 def __get_latest_batch():
