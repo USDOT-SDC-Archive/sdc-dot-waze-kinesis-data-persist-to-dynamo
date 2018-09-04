@@ -87,7 +87,7 @@ PERSIST_RECORDS  - {no_of_records_to_be_persisted}
 
 #### Build Process
 
-**Step 1**: Setup virtual environment on your system by foloowing below link
+**Step 1**: Setup virtual environment on your system by following below link
 https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-deployment-pkg.html#with-s3-example-deployment-pkg-python
 
 **Step 2**: Create a script with below contents e.g(sdc-dot-waze-kinesis-data-persist-to-dynamo.sh)
