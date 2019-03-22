@@ -5,7 +5,6 @@ import base64
 import boto3
 from common.logger_utility import *
 from common.utils import *
-from lambdas.waze_persist_to_dynamo_lambda_handler import *
 
 
 def lambda_handler(event, context):
