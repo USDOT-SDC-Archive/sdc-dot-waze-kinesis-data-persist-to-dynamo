@@ -6,14 +6,15 @@ install:
     - pip install utils
     - pip install moto
     - pip install psycopg2
+    - pip install coverage
 branches:
     only:
         - master
         - develop
 addons:
     sonarcloud:
-        organization: "usdot-jpo-sdc"
-        token:
-            secure: "nn42zxjp/duEftvkkQIrBFLURHkECaqiePazemg9UYNHRVZbHbAfjruY+Qwf7QH2FcBIy2ZQSiN2dC/dN7hDQwYxanpja6TJZF+ANVVccbfR/VRPh76/xvpKgGDPX7X91EQcmIyMQPKVTk1WnRO0fkwaPEpswJc97o6bRNWRJou1RWe6v/7+eYRQ5PnFLFCxs9gO0xw3oVKSKwEB5A+1R3CordqzX/L7HXxsNhUzCm9cchSaMJXE6bgE7AO+iguCc5UfZgSOQ72a86jUAp7lf/B7zc9PhrX2MG12690N8yY0T9NnVNopfDfp4C6ywg9vi3wTMvGElK7bHLww+e0DPVBt8l/tpXYrn6eo+eS5qOXE47drLcyGXx7j3oY5EzTCOaKHfxMIShEyLniVSiSt5NDxLQ6RyuRTt2KJr7MctbEFDc1hPWjVoztm5Nnqi/XUmizbCXoGkx6J/E7FhtZbPvV1lbi8h9YcoMqfZYPvGwiOCU1WoluXGhhw2lxpSTejutKJ+efUxhD8FwSfdsdhf5lp26XZl4yIIbYR2updR6GvWc8c7BxG6oc3GO/iuqqDTIvLZIFd/9IjevE8/Il7UQNtvFZ3F9o0SLSEWVEvBuVy9hz/1aMnTCJWB5HVSemUydVw5osC4T7052+HH0nks8Le2ejUchL4O6jx0oBlhxk="
+        organization: "usdot-jpo-sdc-projects"
+       
 script: 
-    - sonar-scanner
+     - coverage erase
+- sonar-scanner -X -D sonar.login=$SONAR_TOKEN
