@@ -18,15 +18,18 @@ def lambda_handler(event, context):
         LoggerUtility.logError("FATAL: Failed to process record- " + str(data_handling_error))
         LoggerUtility.logError("FATAL: Stacktrace- " + str(traceback.format_exc()))
 
+
 def __decode_data(record):
-    LoggerUtility.logInfo("KINESIS SEQUENCE NUMBER: " + str(record["kinesis"]["sequenceNumber"]) + " || KINESIS EVENT ID: " + record["eventID"])
+    LoggerUtility.logInfo("KINESIS SEQUENCE NUMBER: " + str(record["kinesis"]["sequenceNumber"]) +
+                          " || KINESIS EVENT ID: " + record["eventID"])
     encoded_string = record["kinesis"]["data"]
     return json.loads(base64.b64decode(encoded_string).decode())
+
 
 def __persist_to_dynamodb(records):
     LoggerUtility.logInfo("Records count {} ".format(len(records)))
     """Decode the base64 data."""
-    for index,record in enumerate(records):
+    for index, record in enumerate(records):
         decoded_json = __decode_data(record)
         state = decoded_json.get("state")
         month = decoded_json.get("month")
@@ -42,10 +45,12 @@ def __persist_to_dynamodb(records):
         LoggerUtility.logInfo("data_set:"+data_set)
         LoggerUtility.logInfo("BATCH_ID:"+batch_id)
         if data_set == "waze":
-            Utils.persist_record_to_dynamodb_table(s3_key, table_name, state, num_records, bucket, batch_id, is_historical, month, year)
+            Utils.persist_record_to_dynamodb_table(s3_key, table_name, state, num_records, bucket, batch_id,
+                                                   is_historical, month, year)
         else:
             LoggerUtility.logInfo("Skipped the record because the data set is:"+data_set)
     LoggerUtility.logInfo("Data persisted to dynamodb successfully from Kinesis!")
+
 
 def __get_latest_batch():
     try:
