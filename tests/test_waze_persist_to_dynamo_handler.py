@@ -6,19 +6,12 @@ from unittest import mock
 from lambdas import waze_persist_to_dynamo_handler_main
 
 
+@mock.patch("lambdas.waze_persist_to_dynamo_handler_main.__persist_to_dynamodb", mock.MagicMock())
 def test_lambda_handler():
-
-    # assign __persist_to_dynamodb to a temp variable
-    func1 = waze_persist_to_dynamo_handler_main.__persist_to_dynamodb
-    try:
-        event = {"Records": "records"}
-        waze_persist_to_dynamo_handler_main.__persist_to_dynamodb = mock.MagicMock()
-        waze_persist_to_dynamo_handler_main.lambda_handler(event, context=None)
-        waze_persist_to_dynamo_handler_main.__persist_to_dynamodb.assert_called_with("records")
-
-    finally:
-        # reassign __persist_to_dynamodb
-        waze_persist_to_dynamo_handler_main.__persist_to_dynamodb = func1
+    event = {"Records": "records"}
+    waze_persist_to_dynamo_handler_main.__persist_to_dynamodb = mock.MagicMock()
+    waze_persist_to_dynamo_handler_main.lambda_handler(event)
+    waze_persist_to_dynamo_handler_main.__persist_to_dynamodb.assert_called_with("records")
 
 
 def test_decode_data():
