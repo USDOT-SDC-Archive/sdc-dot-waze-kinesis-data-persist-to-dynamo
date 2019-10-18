@@ -1,21 +1,15 @@
-from common.logger_utility import *
-from common.constants import *
-import csv
-import gzip
+import os
 import uuid
 import boto3
-import datetime
-import os
-from boto3.dynamodb.conditions import Attr
-import re
-import time
+from common.logger_utility import LoggerUtility
 
 
 class Utils:
     pass
 
     @staticmethod
-    def persist_record_to_dynamodb_table(s3_key, table_name, state, num_records, bucket, batch_id, is_historical, month, year):
+    def persist_record_to_dynamodb_table(s3_key, table_name, state, num_records, bucket, batch_id, is_historical, month,
+                                         year):
         try:
             dynamodb_curated_records_table_name = os.environ['DDB_CURATED_RECORDS_TABLE_ARN'].split('/')[1]
             persist_records = bool(int(os.environ['PERSIST_RECORDS']))
@@ -37,13 +31,13 @@ class Utils:
                         'Month': month
                     }
                 )
-                LoggerUtility.logInfo("Successfully persisted record to dynamo db table - {}".format(response))
+                LoggerUtility.log_info("Successfully persisted record to dynamo db table - {}".format(response))
             else:
-                LoggerUtility.logInfo("Persist records flag is disabled, so not persisting "
-                                      "any records to dynamodb table")
+                LoggerUtility.log_info("Persist records flag is disabled, so not persisting "
+                                       "any records to dynamodb table")
 
         except Exception as e:
-            LoggerUtility.logError("Failed to persist record to dynamo db table for key - {}".format(s3_key))
+            LoggerUtility.log_error("Failed to persist record to dynamo db table for key - {}".format(s3_key))
             raise e
 
     @staticmethod
@@ -51,8 +45,8 @@ class Utils:
         try:
             if data != "" and data != "null" and data != "NULL" and data is not None:
                 data = data.replace(r"'", r"\'")
-                data = data.replace("\n","")
-                data = data.replace("\r","")
+                data = data.replace("\n", "")
+                data = data.replace("\r", "")
 
         except Exception as e:
             raise e
