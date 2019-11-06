@@ -5,7 +5,7 @@ import traceback
 from common.utils import *
 
 
-def lambda_handler(event):
+def lambda_handler(event, context):
     LoggerUtility.set_level()
     LoggerUtility.log_info("Event data from previous function is - {}".format(event))
     try:

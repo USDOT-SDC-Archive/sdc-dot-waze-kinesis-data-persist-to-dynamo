@@ -3,14 +3,14 @@ import json
 import boto3
 import os
 from unittest import mock
-from lambdas import waze_persist_to_dynamo_handler_main
+import waze_persist_to_dynamo_handler_main
 
 
-@mock.patch("lambdas.waze_persist_to_dynamo_handler_main.__persist_to_dynamodb", mock.MagicMock())
+@mock.patch("waze_persist_to_dynamo_handler_main.__persist_to_dynamodb", mock.MagicMock())
 def test_lambda_handler():
     event = {"Records": "records"}
     waze_persist_to_dynamo_handler_main.__persist_to_dynamodb = mock.MagicMock()
-    waze_persist_to_dynamo_handler_main.lambda_handler(event)
+    waze_persist_to_dynamo_handler_main.lambda_handler(event, None)
     waze_persist_to_dynamo_handler_main.__persist_to_dynamodb.assert_called_with("records")
 
 
