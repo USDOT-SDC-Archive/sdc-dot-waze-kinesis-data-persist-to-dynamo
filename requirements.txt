@@ -1,0 +1,7 @@
+boto3
+utils
+moto
+psycopg2-binary
+coverage
+pytest
+google_compute_engine
