@@ -1,6 +1,11 @@
-[![Build Status](https://travis-ci.com/usdot-jpo-sdc/sdc-dot-waze-kinesis-data-persist-to-dynamo.svg?branch=master)](https://travis-ci.com/usdot-jpo-sdc/sdc-dot-waze-kinesis-data-persist-to-dynamo)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=usdot-jpo-sdc_sdc-dot-waze-kinesis-data-persist-to-dynamo&metric=alert_status)](https://sonarcloud.io/dashboard?id=usdot-jpo-sdc_sdc-dot-waze-kinesis-data-persist-to-dynamo)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=usdot-jpo-sdc_sdc-dot-waze-kinesis-data-persist-to-dynamo&metric=coverage)](https://sonarcloud.io/dashboard?id=usdot-jpo-sdc_sdc-dot-waze-kinesis-data-persist-to-dynamo)
+# This repository is DEPRECATED!
+
+This repository is deprecated as of **08/05/2020**.
+
+The code and infrastructure has moved to https://github.com/usdot-jpo-sdc-projects/sdc-dot-waze-pipeline
+
+Please refer to the waze pipeline repo for all future development.
+
 # sdc-dot-waze-kinesis-data-persist-to-dynamo
 This lambda function is developed by SDC Team for persisting the curated data from Kinesis Data Stream in DynamoDB.
 
